@@ -2,12 +2,14 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
 import * as actionTypes from "../../redux/actionTypes";
-
+import {fieldCd} from './../../constants/typeCodes'
 import { connect } from "react-redux";
 import ResumePreview from "./resumePreview";
-function Contact() {
 
-  const [contact, setContact] = useState(props.contact);
+function Contact(props) {
+
+ 
+   const [contact, setContact] = useState(props.contact);
   
   const onchange=(event)=>{
     var key =event.target.name;
@@ -15,11 +17,18 @@ function Contact() {
     // this.setState({contactSection:update(this.state.contactSection,{$merge: {[key]:val}})});
     setContact({...contact,[key]:val})
 }
-
+let history = useHistory() ;
   const onSubmit = async () => {
     props.addContact(contact);
+    history.push('/education');
   };
 
+  const getFieldData=(key)=>{
+    if(contact && contact[key]){
+      return contact[key]
+    }
+    return "";
+}
   return (
     <div className="container med contact">
       <div className="section funnel-section">
@@ -183,9 +192,9 @@ function Contact() {
               >
                 Next
               </button>
-              <NavLink to="/getting-started" className="center">
+              {/* <NavLink to="/getting-started" className="center">
                 Back
-              </NavLink>
+              </NavLink> */}
             </div>
           </div>
         </div>
@@ -202,6 +211,7 @@ function Contact() {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state) ;
   return {
     document: state.documentReducer, //contains skin and id
     contact:state.contactReducer

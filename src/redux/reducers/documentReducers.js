@@ -1,7 +1,7 @@
 import initialState from "./initialState.json";
 import * as actionTypes from "../actionTypes";
 
-export default function documentReducer(state = initialState, action) {
+export default function documentReducer(state = initialState.document, action) {
   switch (action.type) {
     case actionTypes.SET_SKIN:
       return {

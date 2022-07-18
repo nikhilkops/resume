@@ -1,20 +1,22 @@
+// import {fieldCd} from './../../constants/typeCodes'
 import { skinCodes } from "../../constants/typeCodes";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
 import React from "react";
 import * as actionTypes from "../../redux/actionTypes";
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 const { v4: uuidv4 } = require("uuid");
 
-function gettingStarted(props) {
-  console.log(props);
-  let history = useHistory();
+
+function GettingStarted(props) {
+ 
+   let history = useHistory()
   const onChange = async (skinCd) => {
     if (props.document.id) {
       props.updateDocument( props.document.id,skinCd);
     } else {
       props.setDocument(skinCd);
-    }
+    }  
     history.push("/contact");
   };
   return (
@@ -65,9 +67,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: actionTypes.SET_SKIN, document: { skinCd,  id } });
     },
     updateDocument: (id,skinCd) => {
-      dipatch({ type: actionTypes.UPDATE_SKIN, document: { skinCd,id } });
+      dispatch({ type: actionTypes.UPDATE_SKIN, document: { skinCd,id } });
     },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(gettingStarted);
+export default connect(mapStateToProps, mapDispatchToProps)(GettingStarted);
